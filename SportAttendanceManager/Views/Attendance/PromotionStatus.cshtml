@@ -106,4 +106,4 @@
 </div>
 
 <hr />
-<button class="btn btn-secondary">Prepare PDF Report</button>
+<a class="btn btn-secondary" href="@Url.Action("PrintPdfTemplate", "Attendance", new { teacherId=Session["idUser"] })">Prepare PDF Report</a>
