@@ -2,10 +2,16 @@
 
 @{
     ViewBag.Title = "PromotionStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 @section Scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <!-- Method used for PDF generator -->
     <script>
         var doc = new jsPDF();
         var specialElementHandlers = {
@@ -23,63 +29,81 @@
         });
 
     </script>
+
+    <!-- (document).ready checks the DOM of the page and when is ready it executes the JS code. -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.tablePromotion').DataTable({
+                "scrollX": true,
+                "scrollY": 160,
+                "order": [],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+            });
+        });
+    </script>
 }
 
 <div id="content">
-    <h2>PromotionStatus</h2>
+    <h1>Promotion Status</h1>
 
     @{
         foreach (var sport in ViewBag.SportNames)
         {
-            <h1>@sport</h1>
+            <hr />
+            <h2>@sport</h2>
 
-            <table class="table">
-                <tr>
-                    <th>
-                        <h2>First name</h2>
-                    </th>
-                    <th>
-                        <h2>Last Name</h2>
-                    </th>
-                    <th>
-                        <h2>Email</h2>
-                    </th>
-                    <th>
-                        <h2>Attendances</h2>
-                    </th>
-                    <th>
-                        <h2>Promoted</h2>
-                    </th>
-                </tr>
-
-                @for (int item = 0; item < Model.Count; item++)
-                {
-                    if (Model[item].SportName.Equals(sport))
+            <table class="table table-striped table-bordered table-sm tablePromotion" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            First name
+                        </th>
+                        <th scope="col">
+                            Last Name
+                        </th>
+                        <th scope="col">
+                            Email
+                        </th>
+                        <th scope="col">
+                            Attendances
+                        </th>
+                        <th class="no-sort" scope="col">
+                            Promoted
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int item = 0; item < Model.Count; item++)
                     {
-                        <tr>
+                        if (Model[item].SportName.Equals(sport))
+                        {
+                            <tr>
 
-                            <td>@Html.DisplayFor(lastName => lastName[item].Student.LastName)</td>
-
-
-                            <td>@Html.DisplayFor(firstName => firstName[item].Student.FirstName)</td>
-
-
-                            <td>@Html.DisplayFor(email => email[item].Student.Email)</td>
+                                <td>@Html.DisplayFor(lastName => lastName[item].Student.LastName)</td>
 
 
-                            <td>@Html.DisplayFor(attendances => attendances[item].Attendances)</td>
+                                <td>@Html.DisplayFor(firstName => firstName[item].Student.FirstName)</td>
 
 
-                            <td>@Html.DisplayFor(isPromoted => isPromoted[item].IsPromoted)</td>
+                                <td>@Html.DisplayFor(email => email[item].Student.Email)</td>
 
-                        </tr>
+
+                                <td>@Html.DisplayFor(attendances => attendances[item].Attendances)</td>
+
+
+                                <td>@Html.DisplayFor(isPromoted => isPromoted[item].IsPromoted)</td>
+
+                            </tr>
+                        }
                     }
-                }
-
+                </tbody>
             </table>
         }
     }
 </div>
 
-<div id="editor"></div>
-<button id="cmd">Generate PDF Report</button>
+<hr />
+<button class="btn btn-secondary">Prepare PDF Report</button>
