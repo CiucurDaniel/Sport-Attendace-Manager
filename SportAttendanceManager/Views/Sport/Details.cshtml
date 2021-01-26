@@ -6,61 +6,50 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Sport</h4>
+<div class="form-horizontal">
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.User.FirstName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.User.FirstName)
-        </dd>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.SportName, "Sport Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.SportName, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SportName)
-        </dt>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.DayOfWeek, "Day Of Week", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.DayOfWeek, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.SportName)
-        </dd>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Hour, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Hour, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Hour)
-        </dt>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Minute, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Minute, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hour)
-        </dd>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Minute)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Minute)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DayOfWeek)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DayOfWeek)
-        </dd>
-
-    </dl>
+    <div class="form-group row justify-content-sm-between">
+        <div class="col-md-2">
+            @Html.ActionLink("Back to Schedule", "Index", new { idTeacher = Session["idUser"] })
+        </div>
+        <div class="col-md-10">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.IdSport})
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdSport }) |
-    @Html.ActionLink("Back to List", "Index", new { idTeacher = Session["idUser"] })
-</p>
