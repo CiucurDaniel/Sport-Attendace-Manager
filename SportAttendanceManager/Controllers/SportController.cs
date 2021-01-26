@@ -16,15 +16,16 @@ namespace SportAttendanceSystem.Controllers
         private SportAttendanceManagerContext db = new SportAttendanceManagerContext();
 
         // GET: Sport
-        public ActionResult Index(int idTeacher)
+        public ActionResult Index()
         {
             //var sports = db.Sports.Include(s => s.User);
             //return View(sports.ToList());
 
             //List<Sport> sportList = new List<Sport>();
+            int teacherID = int.Parse(Session["idUser"].ToString());
 
-            IEnumerable<Sport> query = from sport in db.Sports
-                                       where sport.IdUser == idTeacher
+            IEnumerable <Sport> query = from sport in db.Sports
+                                       where sport.IdUser == teacherID
                                        select sport;
 
 
@@ -74,7 +75,7 @@ namespace SportAttendanceSystem.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdUser = new SelectList(db.Users, "IdUser", "FirstName", sport.IdUser);
+            ViewBag.IdUser = new SelectList(db.Users, "IdUser", "Email", sport.IdUser);
             return View(sport);
         }
 
