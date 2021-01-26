@@ -162,31 +162,19 @@ namespace SportAttendanceSystem.Controllers
         public ActionResult Add(List<StudentsAttendances> presentStudents)
         {
 
+            DateTime today = DateTime.Now;
+
             // TODO: Implement
-
-            if (presentStudents == null)
+            for(int index = 0; index < presentStudents.Count; index++)
             {
-                return Content("You did it, i received data to post but data received is still NULL");
-            }
-            else
-            {
-                string data = "";
-                foreach (var student in presentStudents)
+                if(presentStudents[index].IsPresent)
                 {
-                    if (student.Student == null)
-                    {
-                        data += "NULL OBJECT";
-                    }
-                    else
-                    {
-                        data += "\n" + student.Student.Email + " is present:" + student.IsPresent + "\n";
-                    }
-
+                    Attendance attendance = new Attendance { ReportDate = today, IdStudent = presentStudents[index].Student.IdStudent };
+                    db.Attendances.Add(attendance);
+                    db.SaveChanges();
                 }
-                return Content("You did it, i received data to post: " + presentStudents.Count() + "\n" + data);
-
             }
-
+            return RedirectToAction("Index");
         }
 
         // GET Attendance/PromotionStatus
@@ -219,6 +207,7 @@ namespace SportAttendanceSystem.Controllers
             for (int index = 0; index < studentList.Count; index++)
             {
                 int tempSportId = studentList[index].IdSport;
+                int tempStudentId = studentList[index].IdStudent;
 
                 var tempSportName = from sport in db.Sports
                     where sport.IdSport == tempSportId
@@ -236,7 +225,11 @@ namespace SportAttendanceSystem.Controllers
 
 
                 // compute attendance 
-                int attendance = 10;
+                var nrOfAttendanceQuerry = (from attendanceCount in db.Attendances
+                                            where attendanceCount.IdStudent == tempStudentId
+                                            select attendanceCount).Count();
+
+                int attendance = nrOfAttendanceQuerry;
 
                 studentPromotionViewModels.Add(
                           new StudentPromotionViewModel
