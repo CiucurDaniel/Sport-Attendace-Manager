@@ -57,7 +57,8 @@ namespace SportAttendanceSystem.Controllers
         // GET: Sport/Create
         public ActionResult Create()
         {
-            ViewBag.IdUser = new SelectList(db.Users, "IdUser", "FirstName");
+            ViewBag.IdUser = new SelectList(db.Users, "IdUser", "Email", int.Parse(Session["idUser"].ToString()));
+          
             return View();
         }
 
