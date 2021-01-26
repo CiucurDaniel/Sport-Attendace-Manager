@@ -309,6 +309,7 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Sport\SportsOfTeacher.cshtml" />
+    <Content Include="Views\Attendance\PrintPdfTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
