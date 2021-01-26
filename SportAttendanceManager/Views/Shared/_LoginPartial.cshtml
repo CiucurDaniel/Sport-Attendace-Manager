@@ -1,0 +1,35 @@
+﻿<!-- Here I previously had a model User but was causing errors so
+I removed him, anyway it doesn't make sense because this part of view takes it's data from Session rether than a model class
+-->
+
+@if (Session["idUser"] != null)
+{
+    using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <!--<span class="glyphicon glyphicon-user"></span>-->
+                @Html.ActionLink("Hello, " + Session["FullName"] + "!", "Index", "Home", routeValues: null, new { @class = "nav-link", title = "Manage" })
+            </li>
+            <li class="nav-item">
+                <!--<span class="glyphicon glyphicon-off"></span>-->
+                <a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
+            </li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <!--<span class="glyphicon glyphicon-pencil"></span> -->
+            @Html.ActionLink("Register", "Register", "Home", routeValues: null, new { @class = "nav-link", id = "registerLink" })
+        </li>
+        <li class="nav-item">
+            <!--<span class="glyphicon glyphicon-user"></span>-->
+            @Html.ActionLink("Log In", "Login", "Home", routeValues: null, new { @class = "nav-link", id = "loginLink" })
+        </li>
+    </ul>
+}

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<SportAttendanceSystem.Models.Sport>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+</head>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Imported .js libraries from datatables.net -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <!-- (document).ready checks the DOM of the page and when is ready it executes the JS code. -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tableTeacherSports').DataTable({
+                "scrollX": true,
+                "scrollY": 210,
+                "order": [],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+            });
+        });
+    </script>
+}
+
+<div class="container">
+    <h2>Weekly Schedule</h2>
+    <p>
+        @Html.ActionLink("Add new sport", "Create")
+    </p>
+    <table id="tableTeacherSports" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Sport Name
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Hour)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Minute)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th scope="col">
+                    Day of Week
+                </th>
+                <th class="no-sort" scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SportName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hour)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Minute)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DayOfWeek)
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdSport }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.IdSport }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdSport })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

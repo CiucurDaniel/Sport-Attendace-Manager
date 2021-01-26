@@ -1,0 +1,38 @@
+﻿@model List<SportAttendanceSystem.Models.Sport>
+@{
+    ViewBag.Title = "SportsOfTeacher";
+}
+
+@section Scripts {
+    <script>
+        // script used for shadow effect on cards
+        $(document).ready(function () {
+            // executes when HTML-Document is loaded and DOM is ready
+            $(".card").hover(
+                function () {
+                    $(this).addClass('shadow-lg').css('cursor', 'pointer');
+                }, function () {
+                    $(this).removeClass('shadow-lg');
+                }
+            );
+
+            // document ready
+        });
+    </script>
+}
+
+<div class="card-columns">
+    @for (int index = 0; index < Model.Count; index++)
+    {
+        <a href="@Url.Action("Add", "Attendance", new { sportId = Model[index].IdSport})" style="color:inherit">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">@Html.DisplayFor(sport => sport[index].SportName)</h2>
+                    <p class="card-text">Date: @Html.DisplayFor(sport => sport[index].DayOfWeek)</p>
+                    <p class="card-text">Hour: @Html.DisplayFor(sport => sport[index].Hour):@Html.DisplayFor(sport => sport[index].Minute)</p>
+                </div>
+            </div>
+        </a>
+    }
+</div>
+

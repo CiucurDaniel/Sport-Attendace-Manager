@@ -1,0 +1,101 @@
+﻿@model List<SportAttendanceSystem.ViewModels.StudentsAttendances>
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+</head>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Imported .js libraries from datatables.net -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <!-- (document).ready checks the DOM of the page and when is ready it executes the JS code. -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tableAddAttendance').DataTable({
+                "scrollX": true,
+                "scrollY": 210,
+                "order": [],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+            });
+        });
+    </script>
+}
+
+<div class="container">
+    <h2>Mark students as present</h2>
+    <hr />
+    @using (Html.BeginForm("Add", "Attendance", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+
+            <table id="tableAddAttendance" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            Student Id
+                        </th>
+                        <th scope="col">
+                            First name
+                        </th>
+                        <th scope="col">
+                            Last Name
+                        </th>
+                        <th scope="col">
+                            Email
+                        </th>
+                        <th scope="col">
+                            Present
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int item = 0; item < Model.Count; item++)
+                    {
+                        @Html.HiddenFor(id => id[item].Student.IdStudent)
+                        @Html.HiddenFor(lastName => lastName[item].Student.LastName)
+                        @Html.HiddenFor(firstName => firstName[item].Student.FirstName)
+                        @Html.HiddenFor(email => email[item].Student.Email)
+                        <tr>
+
+
+                            <td>@Html.DisplayFor(id => id[item].Student.IdStudent)</td>
+
+
+                            <td>@Html.DisplayFor(lastName => lastName[item].Student.LastName)</td>
+
+
+                            <td>@Html.DisplayFor(firstName => firstName[item].Student.FirstName)</td>
+
+
+                            <td>@Html.DisplayFor(email => email[item].Student.Email)</td>
+
+
+                            <td class="text-center">@Html.CheckBoxFor(modelItem => modelItem[item].IsPresent)</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-10">
+                <input type="submit" value="Add attendances to students" class="btn btn-success" />
+            </div>
+        </div>
+    }
+</div>

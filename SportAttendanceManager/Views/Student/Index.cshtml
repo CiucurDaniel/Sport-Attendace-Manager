@@ -1,0 +1,91 @@
+﻿@model IEnumerable<SportAttendanceSystem.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+</head>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Imported .js libraries from datatables.net -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <!-- (document).ready checks the DOM of the page and when is ready it executes the JS code. -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tableStudents').DataTable({
+                "scrollX": true,
+                "scrollY": 210,
+                "order": [],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }]
+            });
+        });
+    </script>
+
+}
+
+<div class="container">
+    <h2>Students</h2>
+    <p>
+        @Html.ActionLink("Add new student", "Create")
+    </p>
+    <table id="tableStudents" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.FirstName)*@
+                    First Name
+                </th>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.LastName)*@
+                    Last Name
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th scope="col">
+                    @*@Html.DisplayNameFor(model => model.Sport.Description)*@
+                    Sport
+                </th>
+                <th class="no-sort" scope="col">
+                    Options
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sport.IdSport)
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdStudent }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.IdStudent }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdStudent })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

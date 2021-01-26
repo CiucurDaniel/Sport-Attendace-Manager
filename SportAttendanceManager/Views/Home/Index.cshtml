@@ -2,30 +2,89 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+@section Scripts {
+    <script>
+        // script used for shadow effect on cards
+        $(document).ready(function () {
+            // executes when HTML-Document is loaded and DOM is ready
+            $(".card").hover(
+                function () {
+                    $(this).addClass('shadow-lg').css('cursor', 'pointer');
+                }, function () {
+                    $(this).removeClass('shadow-lg');
+                }
+            );
+
+            // document ready
+        });
+    </script>
+}
+
+@*This row has the functions that will be heavily used by the teacher*@
+<div class="jumbotron bg-transparent text-center">
+    <img class="img-responsive" src="~/Content/Images/sportAttendanceLogo2.png" />
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="card col m-1">
+        <div class="card-body">
+            <h2 class="card-title">My Schedule</h2>
+            <p class="card-text">See your schedule to easily manage your work</p>
+        </div>
+        <div class="card-footer bg-transparent">
+            <a class="btn btn-success" href="@Url.Action("Index", "Sport", new { idTeacher = Session["idUser"]})">Go &raquo;</a>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="card col m-1">
+        <div class="card-body">
+            <h2 class="card-title">Add presence</h2>
+            <p class="card-text">Add presence to a student</p>
+        </div>
+        <div class="card-footer bg-transparent">
+            <a class="btn btn-success" href="@Url.Action("SportsOfTeacher", "Sport", new { idTeacher = Session["idUser"]})">Go &raquo;</a>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="card col m-1">
+        <div class="card-body">
+            <h2 class="card-title">Add student</h2>
+            <p class="card-text">Enroll a new student to your course</p>
+        </div>
+        <div class="card-footer bg-transparent">
+            <a class="btn btn-success" href="@Url.Action("Create", "Student")">Go &raquo;</a>
+        </div>
     </div>
 </div>
+
+@*This row has the functions that will be more seldom used by the teacher*@
+<div class="row">
+    <div class="card col m-1">
+        <div class="card-body">
+            <h2 class="card-title">Personal details</h2>
+            <p class="card-text">Change your personal details</p>
+        </div>
+        <div class="card-footer bg-transparent">
+            <a class="btn btn-success" href="@Url.Action("Edit", "User", new { id=Session["idUser"] })">Go &raquo;</a>
+        </div>
+    </div>
+    <div class="card col m-1">
+        <div class="card-body">
+            <h2 class="card-title">Add sport</h2>
+            <p class="card-text">Add a new sport that you are going to teach</p>
+        </div>
+        <div class="card-footer bg-transparent">
+            <a class="btn btn-success" href='@Url.Action("Create", "Sport")'>Go &raquo;</a>
+        </div>
+    </div>
+    <div class="card col m-1">
+        <div class="card-body">
+            <h2 class="card-title">Student promotion</h2>
+            <p class="card-text">The current student promotion status</p>
+        </div>
+        <div class="card-footer bg-transparent">
+            <a class="btn btn-success" href="@Url.Action("PromotionStatus", "Attendance", new { teacherID=Session["idUser"] })">Go &raquo;</a>
+        </div>
+    </div>
+</div>
+
+
+<!-- <p class="lead">Sport Attendance Manager is the new system which helps teachers to easily keep track of student's attendance at sport.</p> -->

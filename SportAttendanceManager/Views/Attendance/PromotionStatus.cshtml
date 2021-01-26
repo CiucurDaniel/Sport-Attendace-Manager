@@ -1,0 +1,52 @@
+﻿@model List<SportAttendanceSystem.ViewModels.StudentPromotionViewModel>
+
+@{
+    ViewBag.Title = "PromotionStatus";
+}
+
+<h2>PromotionStatus</h2>
+
+
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            <h2>First name</h2>
+        </th>
+        <th>
+            <h2>Last Name</h2>
+        </th>
+        <th>
+            <h2>Email</h2>
+        </th>
+        <th>
+            <h2>Attendances</h2>
+        </th>
+        <th>
+            <h2>Promoted</h2>
+        </th>
+    </tr>
+
+    @for (int item = 0; item < Model.Count; item++)
+    {
+        <tr>
+
+            <td>@Html.DisplayFor(lastName => lastName[item].Student.LastName)</td>
+
+
+            <td>@Html.DisplayFor(firstName => firstName[item].Student.FirstName)</td>
+
+
+            <td>@Html.DisplayFor(email => email[item].Student.Email)</td>
+
+
+            <td>@Html.DisplayFor(isPromoted => isPromoted[item].IsPromoted)</td>
+
+        </tr>
+    }
+
+</table>
+
