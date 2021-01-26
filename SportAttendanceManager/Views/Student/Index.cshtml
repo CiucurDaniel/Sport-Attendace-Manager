@@ -37,21 +37,18 @@
         <thead>
             <tr>
                 <th scope="col">
-                    @*@Html.DisplayNameFor(model => model.FirstName)*@
                     First Name
                 </th>
                 <th scope="col">
-                    @*@Html.DisplayNameFor(model => model.LastName)*@
                     Last Name
                 </th>
                 <th scope="col">
-                    @Html.DisplayNameFor(model => model.Email)
+                    Email Address
                 </th>
                 <th scope="col">
-                    @*@Html.DisplayNameFor(model => model.Sport.Description)*@
                     Sport
                 </th>
-                <th class="no-sort" scope="col">
+                <th class="no-sort text-center" scope="col">
                     Options
                 </th>
             </tr>
@@ -70,7 +67,7 @@
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Sport.IdSport)
+                        @Html.DisplayFor(modelItem => item.Sport.SportName) - @Html.DisplayFor(modelItem => item.Sport.DayOfWeek) @Html.DisplayFor(modelItem => item.Sport.Hour):@Html.DisplayFor(modelItem => item.Sport.Minute)
                     </td>
                     <td class="text-center">
                         @Html.ActionLink("Edit", "Edit", new { id = item.IdStudent }) |
