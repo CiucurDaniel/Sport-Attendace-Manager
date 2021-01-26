@@ -40,7 +40,7 @@ namespace SportAttendanceSystem.Controllers
         // GET: Student/Create
         public ActionResult Create()
         {
-            ViewBag.IdSport = new SelectList(db.Sports, "IdSport", "Description");
+            ViewBag.IdSport = new SelectList(db.Sports, "IdSport", "SportName");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace SportAttendanceSystem.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdSport = new SelectList(db.Sports, "IdSport", "Description", student.IdSport);
+            ViewBag.IdSport = new SelectList(db.Sports, "IdSport", "SportName", student.IdSport);
             return View(student);
         }
 
