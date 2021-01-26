@@ -282,6 +282,7 @@ namespace SportAttendanceSystem.Controllers
             for (int index = 0; index < studentList.Count; index++)
             {
                 int tempSportId = studentList[index].IdSport;
+                int tempStudentId = studentList[index].IdStudent;
 
                 var tempSportName = from sport in db.Sports
                                     where sport.IdSport == tempSportId
@@ -299,7 +300,11 @@ namespace SportAttendanceSystem.Controllers
 
 
                 // compute attendance 
-                int attendance = 10;
+                var nrOfAttendanceQuerry = (from attendanceCount in db.Attendances
+                                            where attendanceCount.IdStudent == tempStudentId
+                                            select attendanceCount).Count();
+
+                int attendance = nrOfAttendanceQuerry;
 
                 studentPromotionViewModels.Add(
                           new StudentPromotionViewModel
@@ -308,8 +313,7 @@ namespace SportAttendanceSystem.Controllers
                               SportName = currentSport,
                               Attendances = attendance,
                               IsPromoted = attendance >= 10 ? "Promoted" : "Failed",
-                          }
-                                    );
+                          });
             }
 
             // List
