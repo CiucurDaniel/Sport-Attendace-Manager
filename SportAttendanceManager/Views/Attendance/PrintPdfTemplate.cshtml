@@ -8,6 +8,8 @@
 
 <h2>PromotionStatus</h2>
 
+<div style="text-align:right">@Html.ActionLink("Print students report", "PrintStudentPromotionReport", new { teacherId = Session["idUser"] })</div>
+
 @{
     foreach (var sport in ViewBag.SportNames)
     {

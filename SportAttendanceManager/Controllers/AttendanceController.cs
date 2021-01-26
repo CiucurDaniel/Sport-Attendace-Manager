@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using SportAttendanceSystem.DataAccessLayer;
 using SportAttendanceSystem.Models;
 using SportAttendanceSystem.ViewModels;
+using Rotativa;
 
 namespace SportAttendanceSystem.Controllers
 {
@@ -325,6 +326,16 @@ namespace SportAttendanceSystem.Controllers
             ViewBag.SportNames = sports;
 
             return View(studentPromotionViewModels);
+        }
+
+        /// <summary>  
+        /// Print Student report details  
+        /// </summary>  
+        /// <returns></returns>  
+        public ActionResult PrintStudentPromotionReport(int teacherId)
+        {
+            var report = new Rotativa.MVC.ActionAsPdf("PrintPdfTemplate", new { teacherId = teacherId});
+            return report;
         }
         protected override void Dispose(bool disposing)
         {
