@@ -14,7 +14,6 @@
                     $(this).removeClass('shadow-lg');
                 }
             );
-
             // document ready
         });
     </script>
@@ -46,11 +45,11 @@
     </div>
     <div class="card col m-1">
         <div class="card-body">
-            <h2 class="card-title">Manage Students</h2>
-            <p class="card-text">Manage the existing students or add someone new</p>
+            <h2 class="card-title">Add Sport</h2>
+            <p class="card-text">Add a new sport that you are going to teach</p>
         </div>
         <div class="card-footer bg-transparent">
-            <a class="btn btn-success" href="@Url.Action("Create", "Student")">Go &raquo;</a>
+            <a class="btn btn-success" href='@Url.Action("Create", "Sport")'>Go &raquo;</a>
         </div>
     </div>
 </div>
@@ -63,16 +62,16 @@
             <p class="card-text">Change your personal details</p>
         </div>
         <div class="card-footer bg-transparent">
-            <a class="btn btn-success" href="@Url.Action("Edit", "User", new { id=Session["idUser"] })">Go &raquo;</a>
+            <a class="btn btn-success" href="@Url.Action("Details", "User", new { id = Session["idUser"] })">Go &raquo;</a>
         </div>
     </div>
     <div class="card col m-1">
         <div class="card-body">
-            <h2 class="card-title">Add Sport</h2>
-            <p class="card-text">Add a new sport that you are going to teach</p>
+            <h2 class="card-title">Manage Students</h2>
+            <p class="card-text">Manage the existing students or add someone new</p>
         </div>
         <div class="card-footer bg-transparent">
-            <a class="btn btn-success" href='@Url.Action("Create", "Sport")'>Go &raquo;</a>
+            <a class="btn btn-success" href="@Url.Action("Create", "Student")">Go &raquo;</a>
         </div>
     </div>
     <div class="card col m-1">
