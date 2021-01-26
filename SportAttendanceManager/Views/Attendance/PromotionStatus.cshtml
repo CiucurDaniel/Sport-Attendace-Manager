@@ -4,49 +4,82 @@
     ViewBag.Title = "PromotionStatus";
 }
 
-<h2>PromotionStatus</h2>
+
+@section Scripts{
+    <script>
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+
+        $('#cmd').click(function () {
+            doc.fromHTML($('#content').html(), 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            doc.save('attendance_report.pdf');
+        });
+
+    </script>
+}
+
+<div id="content">
+    <h2>PromotionStatus</h2>
+
+    @{
+        foreach (var sport in ViewBag.SportNames)
+        {
+            <h1>@sport</h1>
+
+            <table class="table">
+                <tr>
+                    <th>
+                        <h2>First name</h2>
+                    </th>
+                    <th>
+                        <h2>Last Name</h2>
+                    </th>
+                    <th>
+                        <h2>Email</h2>
+                    </th>
+                    <th>
+                        <h2>Attendances</h2>
+                    </th>
+                    <th>
+                        <h2>Promoted</h2>
+                    </th>
+                </tr>
+
+                @for (int item = 0; item < Model.Count; item++)
+                {
+                    if (Model[item].SportName.Equals(sport))
+                    {
+                        <tr>
+
+                            <td>@Html.DisplayFor(lastName => lastName[item].Student.LastName)</td>
 
 
+                            <td>@Html.DisplayFor(firstName => firstName[item].Student.FirstName)</td>
 
 
+                            <td>@Html.DisplayFor(email => email[item].Student.Email)</td>
 
 
-<table class="table">
-    <tr>
-        <th>
-            <h2>First name</h2>
-        </th>
-        <th>
-            <h2>Last Name</h2>
-        </th>
-        <th>
-            <h2>Email</h2>
-        </th>
-        <th>
-            <h2>Attendances</h2>
-        </th>
-        <th>
-            <h2>Promoted</h2>
-        </th>
-    </tr>
-
-    @for (int item = 0; item < Model.Count; item++)
-    {
-        <tr>
-
-            <td>@Html.DisplayFor(lastName => lastName[item].Student.LastName)</td>
+                            <td>@Html.DisplayFor(attendances => attendances[item].Attendances)</td>
 
 
-            <td>@Html.DisplayFor(firstName => firstName[item].Student.FirstName)</td>
+                            <td>@Html.DisplayFor(isPromoted => isPromoted[item].IsPromoted)</td>
 
+                        </tr>
+                    }
+                }
 
-            <td>@Html.DisplayFor(email => email[item].Student.Email)</td>
-
-
-            <td>@Html.DisplayFor(isPromoted => isPromoted[item].IsPromoted)</td>
-
-        </tr>
+            </table>
+        }
     }
+</div>
 
-</table>
-
+<div id="editor"></div>
+<button id="cmd">Generate PDF Report</button>
