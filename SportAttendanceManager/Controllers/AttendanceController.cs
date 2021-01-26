@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using SportAttendanceSystem.DataAccessLayer;
 using SportAttendanceSystem.Models;
 using SportAttendanceSystem.ViewModels;
+using Rotativa;
 
 namespace SportAttendanceSystem.Controllers
 {
@@ -257,6 +258,85 @@ namespace SportAttendanceSystem.Controllers
             return View(studentPromotionViewModels);
         }
 
+
+        // GET Attendance/PrintPdfTemplate
+        public ActionResult PrintPdfTemplate(int teacherId)
+        {
+
+            // The ViewModel we need to pass to the view
+            List<StudentPromotionViewModel> studentPromotionViewModels = new List<StudentPromotionViewModel>();
+
+            // the ViewBag data we need to pass to the view as well 
+            List<string> sports = new List<string>();
+
+
+            // get sports taught by teacher
+
+            var queryToGetUserSports = from sport in db.Sports
+                                       where sport.IdUser == teacherId
+                                       select sport.IdSport;
+
+            var sportList = queryToGetUserSports.ToList();
+
+            // get all the students of the teacher
+
+            var queryToGetStudentList = from student in db.Students
+                                        where queryToGetUserSports.Contains(student.IdSport)
+                                        select student;
+
+            List<Student> studentList = queryToGetStudentList.ToList();
+
+            for (int index = 0; index < studentList.Count; index++)
+            {
+                int tempSportId = studentList[index].IdSport;
+
+                var tempSportName = from sport in db.Sports
+                                    where sport.IdSport == tempSportId
+                                    select sport.SportName;
+
+                // also add the sport to the ViewBag sport list, if it's not yet there
+
+                List<string> tmp = tempSportName.ToList();
+                string currentSport = tmp[0];
+
+                if (!sports.Contains(currentSport))
+                {
+                    sports.Add(currentSport);
+                }
+
+
+                // compute attendance 
+                int attendance = 10;
+
+                studentPromotionViewModels.Add(
+                          new StudentPromotionViewModel
+                          {
+                              Student = studentList[index],
+                              SportName = currentSport,
+                              Attendances = attendance,
+                              IsPromoted = attendance >= 10 ? "Promoted" : "Failed",
+                          }
+                                    );
+            }
+
+            // List
+            // ViewModel
+            // Student sportName Attendances promoted
+
+            ViewBag.SportNames = sports;
+
+            return View(studentPromotionViewModels);
+        }
+
+        /// <summary>  
+        /// Print Student report details  
+        /// </summary>  
+        /// <returns></returns>  
+        public ActionResult PrintStudentPromotionReport(int teacherId)
+        {
+            var report = new Rotativa.MVC.ActionAsPdf("PrintPdfTemplate", new { teacherId = teacherId});
+            return report;
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
