@@ -17,9 +17,11 @@ namespace SportAttendanceSystem.Models
         public string SportName { get; set; }
 
         [Required]
+        [Range(0, 23, ErrorMessage  = "Hour is not valid")]
         public int Hour { get; set; }
 
         [Required]
+        [Range(0, 59, ErrorMessage = "Minute is not valid")]
         public int Minute { get; set; }
 
         [Required]

@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Add a new student</h2>
+<h2>Add a New Student</h2>
 
 @using (Html.BeginForm())
 {
@@ -47,7 +47,7 @@
 
         <div class="form-group row justify-content-sm-between">
             <div class="col-md-2">
-                @Html.ActionLink("See all students", "Index")
+                @Html.ActionLink("See All Students", "Index", null, new { @class = "btn btn-info" })
             </div>
             <div class="col-md-10">
                 <input type="submit" value="Save" class="btn btn-success" />
