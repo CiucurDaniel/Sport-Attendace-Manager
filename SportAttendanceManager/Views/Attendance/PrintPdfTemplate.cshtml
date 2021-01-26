@@ -4,33 +4,34 @@
     ViewBag.Title = "PrintPdfTemplate";
 }
 
-
-
-<h2>PromotionStatus</h2>
-
-<div style="text-align:right">@Html.ActionLink("Print students report", "PrintStudentPromotionReport", new { teacherId = Session["idUser"] })</div>
+<div class="row" style="justify-content: space-between; padding-top: 8px">
+    <h1>Promotion Status</h1>
+    <div>@Html.ActionLink("Print Students Report", "PrintStudentPromotionReport", new { teacherId = Session["idUser"] }, new { @class = "btn btn-secondary" })</div>
+</div>
 
 @{
     foreach (var sport in ViewBag.SportNames)
     {
-        <h1>@sport</h1>
+        <br />
+        <hr />
+        <h2>@sport</h2>
 
-        <table class="table">
+        <table class="table table-bordered">
             <tr>
                 <th>
-                    <h2>First name</h2>
+                    <h4>First name</h4>
                 </th>
                 <th>
-                    <h2>Last Name</h2>
+                    <h4>Last Name</h4>
                 </th>
                 <th>
-                    <h2>Email</h2>
+                    <h4>Email</h4>
                 </th>
                 <th>
-                    <h2>Attendances</h2>
+                    <h4>Attendances</h4>
                 </th>
                 <th>
-                    <h2>Promoted</h2>
+                    <h4>Promoted</h4>
                 </th>
             </tr>
 
