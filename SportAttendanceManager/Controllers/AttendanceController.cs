@@ -189,19 +189,72 @@ namespace SportAttendanceSystem.Controllers
         }
 
         // GET Attendance/PromotionStatus
-        public ActionResult PromotionStatus(int teacherID)
+        public ActionResult PromotionStatus(int teacherId)
         {
-            // here you make a get with teacher ID
-            // and then we will display a list with teachers sports
 
-            List<Sport> sportsOwnedByTeacher = new List<Sport>();
+            // The ViewModel we need to pass to the view
+            List<StudentPromotionViewModel> studentPromotionViewModels = new List<StudentPromotionViewModel>();
+
+            // the ViewBag data we need to pass to the view as well 
+            List<string> sports = new List<string>();
 
 
-            /*IEnumerable<Student> students = from student in db.Students
-                where student.IdSport == sportId
-                select student; */
+            // get sports taught by teacher
 
-            return Content("Yayy!");
+            var queryToGetUserSports = from sport in db.Sports
+                where sport.IdUser == teacherId
+                select sport.IdSport;
+
+            var sportList = queryToGetUserSports.ToList();
+
+            // get all the students of the teacher
+
+            var queryToGetStudentList = from student in db.Students
+                where queryToGetUserSports.Contains(student.IdSport)
+                select student;
+
+            List<Student> studentList = queryToGetStudentList.ToList();
+
+            for (int index = 0; index < studentList.Count; index++)
+            {
+                int tempSportId = studentList[index].IdSport;
+
+                var tempSportName = from sport in db.Sports
+                    where sport.IdSport == tempSportId
+                    select sport.SportName;
+
+                // also add the sport to the ViewBag sport list, if it's not yet there
+
+                List<string> tmp = tempSportName.ToList();
+                string currentSport = tmp[0];
+
+                if (!sports.Contains(currentSport))
+                {
+                    sports.Add(currentSport);
+                }
+
+
+                // compute attendance 
+                int attendance = 10;
+
+                studentPromotionViewModels.Add(
+                          new StudentPromotionViewModel
+                                    {
+                                        Student = studentList[index],
+                                        SportName = currentSport,
+                                        Attendances = attendance,
+                                        IsPromoted = attendance >= 10 ? "Promoted" : "Failed",
+                                    }
+                                    );
+            }
+
+            // List
+            // ViewModel
+            // Student sportName Attendances promoted
+
+            ViewBag.SportNames = sports;
+
+            return View(studentPromotionViewModels);
         }
 
         protected override void Dispose(bool disposing)

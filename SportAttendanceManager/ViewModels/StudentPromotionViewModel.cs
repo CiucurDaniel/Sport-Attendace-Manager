@@ -16,6 +16,7 @@ namespace SportAttendanceSystem.ViewModels
     public class StudentPromotionViewModel
     {
         public Student Student { get; set; }
+        public string SportName { get; set; }
         public int Attendances { get; set; }
         public string IsPromoted { get; set; }
     }
