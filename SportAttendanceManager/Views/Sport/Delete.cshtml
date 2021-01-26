@@ -4,70 +4,55 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Sport</h4>
+<div class="form-horizontal">
+    <h2>Delete a Sport Entry</h2>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.User.FirstName)
-        </dt>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.SportName, "Sport Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.SportName, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.User.FirstName)
-        </dd>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.DayOfWeek, "Day Of Week", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.DayOfWeek, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SportName)
-        </dt>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Hour, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Hour, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.SportName)
-        </dd>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Minute, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Minute, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Hour)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hour)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Minute)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Minute)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DayOfWeek)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DayOfWeek)
-        </dd>
-
-    </dl>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @readonly = "readonly" })
+        </div>
+    </div>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index", new { idTeacher = Session["idUser"] })
+        <div class="form-group row justify-content-sm-between">
+            <div class="col-md-2">
+                @Html.ActionLink("Cancel", "Index", new { idTeacher = Session["idUser"] })
+            </div>
+            <div class="col-md-10">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
         </div>
     }
 </div>

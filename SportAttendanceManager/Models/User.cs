@@ -25,12 +25,12 @@ namespace SportAttendanceSystem.Models
 
 
         [Required(ErrorMessage = "Email is required")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "This is not a valid email address")]
         public string Email { get; set; }
 
 
         [Required]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$", ErrorMessage = "Password should contain at least 8 characters, one uppercase, one lowercase and one number")]
         public string Password { get; set; }
 
 
