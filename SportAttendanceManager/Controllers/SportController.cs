@@ -91,7 +91,7 @@ namespace SportAttendanceSystem.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdUser = new SelectList(db.Users, "IdUser", "FirstName", sport.IdUser);
+            ViewBag.IdUser = new SelectList(db.Users, "IdUser", "Email", sport.IdUser);
             return View(sport);
         }
 
