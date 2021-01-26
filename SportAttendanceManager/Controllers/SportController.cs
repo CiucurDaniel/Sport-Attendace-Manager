@@ -58,7 +58,6 @@ namespace SportAttendanceSystem.Controllers
         public ActionResult Create()
         {
             ViewBag.IdUser = new SelectList(db.Users, "IdUser", "Email", int.Parse(Session["idUser"].ToString()));
-          
             return View();
         }
 
