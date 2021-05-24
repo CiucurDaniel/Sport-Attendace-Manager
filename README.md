@@ -10,14 +10,24 @@ Sport Attendance is a ASP .NET MVC5 application aimed to create a platform for t
 * Ciucur Daniel
 * Tuns Adrian
 
+# Getting started
+
+the project contains many branches:
+
+master
+ad
+ionel
+dan
+default 
+
 # Design Patterns
 
-* Model View
-* View-Model
+* Model View View-Model
 
 # Status of the project 
 
-The project is completed.
+The project was completed for the assignment from the univeristy, however development is planned to still go on.
+All those new changes are going to happen in the master branch.
 
 ## Technologies
 
