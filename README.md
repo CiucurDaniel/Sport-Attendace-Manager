@@ -2,13 +2,13 @@
 
 # Sport Attendace Manager
 
-Sport Attendance is a ASP .NET MVC5 application aimed to create a platform for teacher to easily manage students attendance at sport.
+Sport Attendance is a ASP .NET MVC5 application aimed to create a platform for teachers to easily manage students attendance at sport.
 
 # Development Team
 
-* Iovescu Andrei
-* Ciucur Daniel
-* Tuns Adrian
+* [Iovescu Andrei](https://github.com/AndreiIovescu)
+* [Ciucur Daniel](https://github.com/CiucurDaniel)
+* [Tuns Adrian](https://github.com/TunsAdrian)
 
 # Getting started
 
